@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    container_name: match-api_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: nexus
+      RABBITMQ_DEFAULT_PASS: nexus123
+    ports:
+      - 15672:15672
+      - 5672:5672
