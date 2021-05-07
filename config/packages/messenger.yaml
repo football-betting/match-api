@@ -1,6 +1,6 @@
 framework:
     messenger:
         transports:
-            Match: '%env(Match)%'
+            match.api.to.match: '%env(Match)%'
         routing:
-            'stdClass': Match
+            'stdClass': match.api.to.match
