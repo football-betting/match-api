@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<DataProviders
+        xmlns="xervice:dataprovider-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="xervice:dataprovider-01 ../vendor/xervice/data-provider/dataprovider.schema.xsd"
+>
+    <DataProvider name="Competition">
+        <DataElement name="count" type="int"/>
+        <DataElement name="competition" type="CompetitionValues"/>
+        <DataElement name="matches" type="ResponseMatch[]" singleton="ResponseMatch"/>
+    </DataProvider>
+
+    <DataProvider name="CompetitionValues">
+        <DataElement name="name" type="string"/>
+    </DataProvider>
+
+
+    <DataProvider name="ResponseMatch">
+        <DataElement name="utcDate" type="string"/>
+        <DataElement name="homeTeam" type="Team"/>
+        <DataElement name="awayTeam" type="Team"/>
+        <DataElement name="score" type="Score"/>
+    </DataProvider>
+
+    <DataProvider name="Team">
+        <DataElement name="name" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Score">
+        <DataElement name="fullTime" type="FullTime"/>
+    </DataProvider>
+
+    <DataProvider name="FullTime">
+        <DataElement name="homeTeam" type="int" allownull="true"/>
+        <DataElement name="awayTeam" type="int" allownull="true"/>
+    </DataProvider>
+
+</DataProviders>

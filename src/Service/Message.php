@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\DataTransferObject\TestDataProvider;
+use App\DataTransferObject\MatchDataProvider;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class Message
@@ -20,8 +20,8 @@ final class Message
         $this->messageBus = $messageBus;
     }
 
-    public function send(TestDataProvider $testDataProvider): void
+    public function send(MatchDataProvider $testDataProvider): void
     {
-        $this->messageBus->dispatch($testDataProvider);
+        $this->messageBus->dispatch((object)$testDataProvider->toArray());
     }
 }

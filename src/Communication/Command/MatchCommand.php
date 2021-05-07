@@ -3,25 +3,30 @@
 
 namespace App\Communication\Command;
 
-
+use App\Service\Request;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 class MatchCommand extends Command
 {
     private const COMMAND = 'football:matches';
     private const DESCRIPTION = 'Get all live matches';
     /**
-     * @var \Symfony\Component\Messenger\MessageBusInterface
+     * @var \Service\Request
      */
-    private $messageBus;
+    private Request $request;
 
-    public function __construct(MessageBusInterface $messageBus)
+
+    /**
+     * MatchCommand constructor.
+     *
+     * @param \Service\Request $request
+     */
+    public function __construct(Request $request)
     {
         parent::__construct();
-        $this->messageBus = $messageBus;
+        $this->request = $request;
     }
 
     /**
@@ -40,17 +45,11 @@ class MatchCommand extends Command
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
-     * @return int|void
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $test = [
-            'bla' => 1,
-            'aeg' => 'aegea',
-            'aedds' => 'afea'
-        ];
-
-        $this->messageBus->dispatch((object)$test);
+        ($this->request)();
 
         return 1;
     }

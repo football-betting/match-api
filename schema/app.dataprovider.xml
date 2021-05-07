@@ -5,9 +5,18 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="xervice:dataprovider-01 ../vendor/xervice/data-provider/dataprovider.schema.xsd"
 >
-    <DataProvider name="Test">
-        <DataElement name="ident" type="int"/>
-        <DataElement name="name" type="string"/>
+    <DataProvider name="Match">
+        <DataElement name="event" type="string"/>
+        <DataElement name="data" type="Data"/>
+    </DataProvider>
+
+    <DataProvider name="Data">
+        <DataElement name="matchId" type="string"/>
+        <DataElement name="team1" type="string"/>
+        <DataElement name="team2" type="string"/>
+        <DataElement name="matchDatetime" type="string"/>
+        <DataElement name="scoreTeam1" type="int" allownull="true"/>
+        <DataElement name="scoreTeam2" type="int" allownull="true"/>
     </DataProvider>
 
 </DataProviders>
