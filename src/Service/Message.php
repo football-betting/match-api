@@ -20,8 +20,8 @@ final class Message
         $this->messageBus = $messageBus;
     }
 
-    public function send(MatchDataProvider $testDataProvider): void
+    public function send(MatchDataProvider $matchDataProvider): void
     {
-        $this->messageBus->dispatch((object)$testDataProvider->toArray());
+        $this->messageBus->dispatch((object)$matchDataProvider->toArray());
     }
 }

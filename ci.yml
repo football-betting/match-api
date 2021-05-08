@@ -1,0 +1,19 @@
+name: CI Match-Api
+
+on: push
+
+jobs:
+  test:
+    name: checkout and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v1
+      - name: composer install
+        run: composer install
+      - name: run phpunit
+        run: php vendor/bin/phpunit
+      - name: run mutation tests
+          run: vendor/bin/infection --only-covered
+      - name: run psalm
+          run: vendor/bin/psalm

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-
 namespace App\Service;
-
 
 use App\DataTransferObject\CompetitionDataProvider;
 use GuzzleHttp\Client;
@@ -11,6 +9,7 @@ class Request
 {
     private const X_Auth_Token = 'X-Auth-Token';
     private const HEADERS = 'headers';
+    private const LIVE_STATUS = '?status=LIVE';
 
     private string $apiUrI;
     private string $apiToken;
@@ -30,8 +29,10 @@ class Request
         $this->apiToken = $apiToken;
     }
 
-
-    public function __invoke()
+    /**
+     * @return \App\DataTransferObject\CompetitionDataProvider
+     */
+    public function __invoke(): CompetitionDataProvider
     {
         $client = new Client();
         $uri = $this->apiUrI;
@@ -43,8 +44,11 @@ class Request
         $response = $client->get($uri, $header);
         $json = $response->getBody()->getContents();
 
-        $test = new CompetitionDataProvider();
-        $test->fromArray(json_decode($json, true));
-        dump($test);die;
+        $competitionDataProvider = new CompetitionDataProvider();
+        $responseArray = is_array(json_decode($json, true)) ? (array)json_decode($json, true) : [];
+
+        $competitionDataProvider->fromArray($responseArray);
+
+        return $competitionDataProvider;
     }
 }
