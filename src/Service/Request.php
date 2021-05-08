@@ -9,24 +9,27 @@ class Request
 {
     private const X_Auth_Token = 'X-Auth-Token';
     private const HEADERS = 'headers';
-    private const LIVE_STATUS = '?status=LIVE';
 
-    private string $apiUrI;
+    private string $apiUri;
     private string $apiToken;
+    private string $apiUriLive;
 
     /**
      * Request constructor.
      *
-     * @param string $apiUrI
+     * @param string $apiUri
      * @param string $apiToken
+     * @param string $apiUriLive
      */
     public function __construct(
-        string $apiUrI,
-        string $apiToken
+        string $apiUri,
+        string $apiToken,
+        string $apiUriLive,
     )
     {
-        $this->apiUrI = $apiUrI;
+        $this->apiUri = $apiUri;
         $this->apiToken = $apiToken;
+        $this->apiUriLive = $apiUriLive;
     }
 
     /**
@@ -35,8 +38,7 @@ class Request
     public function __invoke(bool $live): CompetitionDataProvider
     {
         $client = new Client();
-        $this->apiUrI .= $live ? self::LIVE_STATUS : '';
-        $uri = $this->apiUrI;
+        $uri = $live ? $this->apiUriLive : $this->apiUri;
         $header = [
              self::HEADERS => [
                 self::X_Auth_Token => $this->apiToken

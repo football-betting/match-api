@@ -40,5 +40,6 @@ services:
 
     App\Service\Request:
         arguments:
-            $apiUrI: '%env(API_URI)%'
+            $apiUri: '%env(API_URI)%'
             $apiToken: '%env(X_Auth_Token)%'
+            $apiUriLive: '%env(API_URI_LIVE)%'
