@@ -64,8 +64,9 @@ class MatchMapper
     private function getMatchDatetime(ResponseMatchDataProvider $responseMatchDataProvider): string
     {
         $timeStamp = strtotime($responseMatchDataProvider->getUtcDate());
+        $matchDateTime = $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
 
-        return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
+        return $matchDateTime;
     }
 
     /**
