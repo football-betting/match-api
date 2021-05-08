@@ -6,6 +6,8 @@ use App\DataTransferObject\DataDataProvider;
 use App\DataTransferObject\MatchDataProvider;
 use App\DataTransferObject\ResponseMatchDataProvider;
 use App\IsoCodeConfig;
+use DateTime;
+use RuntimeException;
 
 class MatchMapper
 {
@@ -59,13 +61,19 @@ class MatchMapper
     /**
      * @param string $utcDate
      *
+     * @throws \Exception
      * @return string
      */
     private function getMatchDatetime(string $utcDate): string
     {
-        $timeStamp = strtotime($utcDate);
 
-        return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $utcDate;
+        $dateTime = new DateTime($utcDate);
+        $date = $dateTime->format('Y-m-d H:i');
+
+        if ($date === false)
+            throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
+
+        return $date;
     }
 
     /**
@@ -75,10 +83,11 @@ class MatchMapper
      */
     private function getCountryIsCode(string $countryName): string
     {
-        if(isset(IsoCodeConfig::ISO_CODES[$countryName])) {
+
+        if (isset(IsoCodeConfig::ISO_CODES[$countryName])) {
             return IsoCodeConfig::ISO_CODES[$countryName];
         }
 
-        throw new \RuntimeException('ISO Code not found for countryName:' .  $countryName);
+        throw new RuntimeException('ISO Code not found for countryName:' . $countryName);
     }
 }
