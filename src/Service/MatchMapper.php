@@ -67,6 +67,9 @@ class MatchMapper
     {
         $timeStamp = strtotime($responseMatchDataProvider->getUtcDate());
 
+        /**
+         * @psalm-suppress GoodTypeFromDocblockIssue
+         */
         return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
     }
 
