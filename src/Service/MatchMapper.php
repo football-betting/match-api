@@ -26,7 +26,7 @@ class MatchMapper
             ->setMatchId($this->getMatchId($responseMatchDataProvider))
             ->setTeam1($this->getCountryIsCode($responseMatchDataProvider->getHomeTeam()->getName()))
             ->setTeam2($this->getCountryIsCode($responseMatchDataProvider->getAwayTeam()->getName()))
-            ->setMatchDatetime($this->getMatchDatetime($responseMatchDataProvider))
+            ->setMatchDatetime($this->getMatchDatetime($responseMatchDataProvider->getUtcDate()))
             ->setScoreTeam1($responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam())
             ->setScoreTeam2($responseMatchDataProvider->getScore()->getFullTime()->getAwayTeam());
 
@@ -57,20 +57,15 @@ class MatchMapper
     }
 
     /**
-     * @param \App\DataTransferObject\ResponseMatchDataProvider $responseMatchDataProvider
-     *
-     * @psalm-suppress GoodTypeFromDocblockIssue
+     * @param string $utcDate
      *
      * @return string
      */
-    private function getMatchDatetime(ResponseMatchDataProvider $responseMatchDataProvider): string
+    private function getMatchDatetime(string $utcDate): string
     {
-        $timeStamp = strtotime($responseMatchDataProvider->getUtcDate());
+        $timeStamp = strtotime($utcDate);
 
-        /**
-         * @psalm-suppress GoodTypeFromDocblockIssue
-         */
-        return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
+        return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $utcDate;
     }
 
     /**
