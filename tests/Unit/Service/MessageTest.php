@@ -4,7 +4,6 @@ namespace App\Tests\Unit\Service;
 
 use App\DataTransferObject\DataDataProvider;
 use App\DataTransferObject\MatchDataProvider;
-use App\DataTransferObject\TestDataProvider;
 use App\Service\Message;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
@@ -12,7 +11,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class MessageTest extends TestCase
 {
-    public function testSend()
+    public function testSend(): void
     {
         $messageBusStub = new class implements MessageBusInterface {
             public \stdClass $message;

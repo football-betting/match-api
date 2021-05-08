@@ -75,6 +75,10 @@ class MatchMapper
      */
     private function getCountryIsCode(string $countryName): string
     {
-        return IsoCodeConfig::ISO_CODES[$countryName] ?? '';
+        if(isset(IsoCodeConfig::ISO_CODES[$countryName])) {
+            return IsoCodeConfig::ISO_CODES[$countryName];
+        }
+
+        throw new \RuntimeException('ISO Code not found for countryName:' .  $countryName);
     }
 }

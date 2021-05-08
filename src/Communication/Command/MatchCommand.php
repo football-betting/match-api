@@ -8,12 +8,15 @@ use App\Service\Message;
 use App\Service\Request;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MatchCommand extends Command
 {
     private const COMMAND = 'football:matches';
     private const DESCRIPTION = 'Get all live matches';
+    private const LIVE_OPTION = 'live';
+
     /**
      * @var \App\Service\Request
      */
@@ -54,6 +57,12 @@ class MatchCommand extends Command
         $this
             ->setName(self::COMMAND)
             ->setDescription(self::DESCRIPTION)
+            ->addOption(
+                self::LIVE_OPTION,
+                null,
+                InputOption::VALUE_NONE,
+                'If only live games should be exported to rabbitMq'
+            )
         ;
 
     }
@@ -66,7 +75,8 @@ class MatchCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $competitionDataProvider = ($this->request)();
+        $liveFlag = $input->getOption(self::LIVE_OPTION) === true;
+        $competitionDataProvider = ($this->request)($liveFlag);
 
         foreach ($competitionDataProvider->getMatches() as $responseMatchDataProvider) {
             $matchDataProvider = ($this->matchMapper)($responseMatchDataProvider);

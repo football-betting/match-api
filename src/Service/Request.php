@@ -32,10 +32,10 @@ class Request
     /**
      * @return \App\DataTransferObject\CompetitionDataProvider
      */
-    public function __invoke(): CompetitionDataProvider
+    public function __invoke(bool $live): CompetitionDataProvider
     {
         $client = new Client();
-        $uri = $this->apiUrI;
+        $uri = $live ? $this->apiUrI . self::LIVE_STATUS : $this->apiUrI;
         $header = [
              self::HEADERS => [
                 self::X_Auth_Token => $this->apiToken
