@@ -45,10 +45,25 @@ class Request
         $json = $response->getBody()->getContents();
 
         $competitionDataProvider = new CompetitionDataProvider();
-        $responseArray = is_array(json_decode($json, true)) ? (array)json_decode($json, true) : [];
+        $responseArray = $this->getResponseAsArray($json);
 
         $competitionDataProvider->fromArray($responseArray);
 
         return $competitionDataProvider;
+    }
+
+    /**
+     * @param string $json
+     *
+     * @psalm-suppress MixedInferredReturnType
+     *
+     * @return array
+     */
+    private function getResponseAsArray(string $json): array
+    {
+        /**
+         * @psalm-suppress MixedReturnStatement
+         */
+        return is_array(json_decode($json, true)) ? json_decode($json, true) : [];
     }
 }
