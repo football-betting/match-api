@@ -61,16 +61,17 @@ class MatchMapper
     /**
      * @param string $utcDate
      *
-     * @throws \Exception
      * @return string
      */
     private function getMatchDatetime(string $utcDate): string
     {
+        if (empty($utcDate))
+            throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
 
         $dateTime = new DateTime($utcDate);
         $date = $dateTime->format('Y-m-d H:i');
 
-        if ($date === false)
+        if (!is_string($date))
             throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
 
         return $date;
@@ -88,6 +89,6 @@ class MatchMapper
             return IsoCodeConfig::ISO_CODES[$countryName];
         }
 
-        throw new RuntimeException('ISO Code not found for countryName:' . $countryName);
+        throw new RuntimeException(sprintf('ISO Code not found for countryName: %s', $countryName));
     }
 }

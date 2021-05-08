@@ -47,15 +47,8 @@ class MatchMapperTest extends TestCase
         $matchMapper = new MatchMapper();
         $testResponseMatchDataProvider->setUtcDate('');
 
-        $matchDataProvider = $matchMapper($testResponseMatchDataProvider);
-
-        self::assertSame($expectedTestMatchDataProvider->getEvent(), $matchDataProvider->getEvent());
-        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam1() . '-' . $expectedTestMatchDataProvider->getData()->getTeam2(), $matchDataProvider->getData()->getMatchId());
-        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam1(), $matchDataProvider->getData()->getTeam1());
-        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam2(), $matchDataProvider->getData()->getTeam2());
-        self::assertSame('', $matchDataProvider->getData()->getMatchDatetime());
-        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam1(), $matchDataProvider->getData()->getScoreTeam1());
-        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam2(), $matchDataProvider->getData()->getScoreTeam2());
+        $this->expectException(\RuntimeException::class);
+        $matchMapper($testResponseMatchDataProvider);
     }
 
     /**

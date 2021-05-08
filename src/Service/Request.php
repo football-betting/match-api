@@ -35,7 +35,8 @@ class Request
     public function __invoke(bool $live): CompetitionDataProvider
     {
         $client = new Client();
-        $uri = $live ? $this->apiUrI . self::LIVE_STATUS : $this->apiUrI;
+        $this->apiUrI .= $live ? self::LIVE_STATUS : '';
+        $uri = $this->apiUrI;
         $header = [
              self::HEADERS => [
                 self::X_Auth_Token => $this->apiToken
