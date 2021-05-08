@@ -59,14 +59,15 @@ class MatchMapper
     /**
      * @param \App\DataTransferObject\ResponseMatchDataProvider $responseMatchDataProvider
      *
+     * @psalm-suppress GoodTypeFromDocblockIssue
+     *
      * @return string
      */
     private function getMatchDatetime(ResponseMatchDataProvider $responseMatchDataProvider): string
     {
         $timeStamp = strtotime($responseMatchDataProvider->getUtcDate());
-        $matchDateTime = $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
 
-        return $matchDateTime;
+        return $timeStamp !== false ? date('Y-m-d H:i', $timeStamp) : $responseMatchDataProvider->getUtcDate();
     }
 
     /**
