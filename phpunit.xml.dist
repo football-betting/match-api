@@ -3,24 +3,22 @@
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
          colors="true"
          bootstrap="tests/bootstrap.php"
          executionOrder="random"
-         resolveDependencies="true"
 >
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
-
-        <env name="X_Auth_Token" value="096e2cbb80484410a246d0e9168ad3c5" force="true"/>
-        <env name="API_URI" value="http://api.football-data.org/v2/competitions/EC/matches" force="true"/>
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Unit">
+            <directory>./tests/Unit/</directory>
+        </testsuite>
+        <testsuite name="Acceptance">
+            <directory>./tests/Acceptance/</directory>
         </testsuite>
     </testsuites>
 

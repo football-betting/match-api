@@ -3,33 +3,20 @@
 namespace App\Service;
 
 use App\DataTransferObject\CompetitionDataProvider;
-use GuzzleHttp\Client;
+use RuntimeException;
 
 class Request
 {
-    private const X_Auth_Token = 'X-Auth-Token';
-    private const HEADERS = 'headers';
+    private const JSON_DEPTH = 512;
 
-    private string $apiUri;
-    private string $apiToken;
-    private string $apiUriLive;
+    private ClientInterface $client;
 
     /**
-     * Request constructor.
-     *
-     * @param string $apiUri
-     * @param string $apiToken
-     * @param string $apiUriLive
+     * @param \App\Service\ClientInterface $client
      */
-    public function __construct(
-        string $apiUri,
-        string $apiToken,
-        string $apiUriLive,
-    )
+    public function __construct(ClientInterface $client)
     {
-        $this->apiUri = $apiUri;
-        $this->apiToken = $apiToken;
-        $this->apiUriLive = $apiUriLive;
+        $this->client = $client;
     }
 
     /**
@@ -37,36 +24,19 @@ class Request
      */
     public function __invoke(bool $live): CompetitionDataProvider
     {
-        $client = new Client();
-        $uri = $live ? $this->apiUriLive : $this->apiUri;
-        $header = [
-             self::HEADERS => [
-                self::X_Auth_Token => $this->apiToken
-            ]
-        ];
-        $response = $client->get($uri, $header);
-        $json = $response->getBody()->getContents();
+        $client = $this->client;
+        $content = $client($live)->getContent();
+
+        $responseArray = (array)json_decode($content, true);
+
+        if (!isset($responseArray['count'])) {
+            throw new RuntimeException('Error');
+        }
 
         $competitionDataProvider = new CompetitionDataProvider();
-        $responseArray = $this->getResponseAsArray($json);
 
         $competitionDataProvider->fromArray($responseArray);
 
         return $competitionDataProvider;
-    }
-
-    /**
-     * @param string $json
-     *
-     * @psalm-suppress MixedInferredReturnType
-     *
-     * @return array
-     */
-    private function getResponseAsArray(string $json): array
-    {
-        /**
-         * @psalm-suppress MixedReturnStatement
-         */
-        return is_array(json_decode($json, true)) ? json_decode($json, true) : [];
     }
 }
