@@ -17,5 +17,5 @@
         "@default": true
     },
     "initialTestsPhpOptions": "-d xdebug.mode=coverage",
-    "testFrameworkOptions": "--verbose"
+    "testFrameworkOptions": "--verbose --testsuite=Unit"
 }

@@ -65,14 +65,17 @@ class MatchMapper
      */
     private function getMatchDatetime(string $utcDate): string
     {
-        if (empty($utcDate))
+        if (empty($utcDate)) {
             throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
+        }
+
 
         $dateTime = new DateTime($utcDate);
         $date = $dateTime->format('Y-m-d H:i');
 
-        if (!is_string($date))
+        if (!is_string($date)) {
             throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
+        }
 
         return $date;
     }
@@ -84,7 +87,6 @@ class MatchMapper
      */
     private function getCountryIsCode(string $countryName): string
     {
-
         if (isset(IsoCodeConfig::ISO_CODES[$countryName])) {
             return IsoCodeConfig::ISO_CODES[$countryName];
         }
