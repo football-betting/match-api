@@ -20,6 +20,9 @@ final class Message
         $this->messageBus = $messageBus;
     }
 
+    /**
+     * @param \App\DataTransferObject\MatchDataProvider $matchDataProvider
+     */
     public function send(MatchDataProvider $matchDataProvider): void
     {
         $this->messageBus->dispatch((object)$matchDataProvider->toArray());

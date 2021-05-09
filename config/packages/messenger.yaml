@@ -1,5 +1,7 @@
 framework:
     messenger:
+        serializer:
+            default_serializer: App\Messenger\MessengerSerializer
         transports:
             match.api.to.match: '%env(Match)%'
         routing:
