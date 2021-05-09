@@ -2,8 +2,10 @@
 
 namespace App\Tests\Acceptance\Service;
 
+use App\Service\Client;
 use App\Service\Request;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpClient\MockHttpClient;
 
 class RequestTest extends KernelTestCase
 {
@@ -33,5 +35,17 @@ class RequestTest extends KernelTestCase
         $competitionDataProvider = $request(true);
 
         self::assertSame(self::COMPETITION_NAME, $competitionDataProvider->getCompetition()->getName());
+    }
+
+    public function testWithWrongUrlAndToken(): void
+    {
+        /** @var \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient */
+        $httpClient = new MockHttpClient();
+        $client = new Client($httpClient, '', '', '');
+        $request = new Request($client);
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $request(false);
     }
 }
