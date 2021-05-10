@@ -27,6 +27,8 @@
     - `docker-compose start`
 - Stop container:
     - `docker-compose start`
+- Admin Panel:
+    - http://localhost:15672
 - Messenges are published to rabbitMq ad Json:
 ```json
 {"event":"match.api","data":{"matchId":"2021-06-11:1900:TR-IT","team1":"TR","team2":"IT","matchDatetime":"2021-06-11 19:00"}}"
