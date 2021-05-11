@@ -1,6 +1,7 @@
 # **Match-Api**
 
 ---
+
 ###Setup project:
 - please make sure to have amqp-1.11.0beta or higher installed locally
 - `composer install`
@@ -8,6 +9,7 @@
 - `bash init.sh`
 
 ---
+
 ###Before pushing:
 - Execute following commands without getting any errors:
     - `php vendor/bin/phpunit`
@@ -23,6 +25,7 @@
     - `bin/console football:matches --live`
     
 ---
+
 ###RabbitMq
 - Start container:
     - `docker-compose start`
@@ -32,5 +35,5 @@
     - http://localhost:15672
 - Messenges are published to rabbitMq as Json:
 ```json
-{"event":"match.api","data":{"matchId":"2021-06-11:1900:TR-IT","team1":"TR","team2":"IT","matchDatetime":"2021-06-11 19:00"}}"
+{"event":"match.api","data":{"matchId":"2021-06-11:1900:TR-IT","team1":"TR","team2":"IT","matchDatetime":"2021-06-11 19:00"}}
 ```
