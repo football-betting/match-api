@@ -36,4 +36,4 @@ jobs:
           type: ${{ job.status }}
           job_name: '*Match-Api Check*'
           channel: 'football-betting'
-          url: ${{ https://mattermost.nxs360.com/hooks/bjoh9yiaapf1uyima5jr99kgcw }}
+          url: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
