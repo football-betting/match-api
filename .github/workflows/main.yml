@@ -34,6 +34,6 @@ jobs:
         if: always()
         with:
           type: ${{ job.status }}
-          job_name: '*Lint Check*'
-          channel: 'random'
-          url: ${{ secrets.https://mattermost.nxs360.com/hooks/bjoh9yiaapf1uyima5jr99kgcw }}
+          job_name: '*Match-Api Check*'
+          channel: 'football-betting'
+          url: ${{ https://mattermost.nxs360.com/hooks/bjoh9yiaapf1uyima5jr99kgcw }}
