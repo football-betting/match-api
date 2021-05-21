@@ -7,8 +7,6 @@ use RuntimeException;
 
 class Request
 {
-    private const JSON_DEPTH = 512;
-
     private ClientInterface $client;
 
     /**

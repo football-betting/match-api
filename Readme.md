@@ -30,7 +30,7 @@
 - Start container:
     - `docker-compose start`
 - Stop container:
-    - `docker-compose start`
+    - `docker-compose stop`
 - Admin Panel:
     - http://localhost:15672
 - Messenges are published to rabbitMq as Json:

@@ -29,3 +29,11 @@ jobs:
         run: vendor/bin/infection --only-covered --min-msi=100
       - name: run psalm
         run: vendor/bin/psalm
+      - name: Mattermost Notification
+        uses: tferreira/matterfy@releases/v1
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: '*Lint Check*'
+          channel: 'random'
+          url: ${{ secrets.https://mattermost.nxs360.com/hooks/bjoh9yiaapf1uyima5jr99kgcw }}
