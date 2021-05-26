@@ -2,7 +2,7 @@
 
 ---
 
-###Setup project:
+### Setup project:
 - please make sure to have amqp-1.11.0beta or higher installed locally
 - `composer install`
 - `docker-compose up -d`
@@ -10,7 +10,7 @@
 
 ---
 
-###Before pushing:
+### Before pushing:
 - Execute following commands without getting any errors:
     - `php vendor/bin/phpunit`
     - `vendor/bin/infection --only-covered --min-msi=100`
@@ -26,7 +26,7 @@
     
 ---
 
-###RabbitMq
+### RabbitMq
 - Start container:
     - `docker-compose start`
 - Stop container:
