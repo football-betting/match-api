@@ -11,7 +11,7 @@ use RuntimeException;
 
 class MatchMapper
 {
-    private const EVENT = 'match.api';
+    private const EVENT = 'match.api.to.match';
     private const HYPHEN = '-';
 
     /**
