@@ -79,8 +79,12 @@ class MatchCommand extends Command
         $competitionDataProvider = ($this->request)($liveFlag);
 
         foreach ($competitionDataProvider->getMatches() as $responseMatchDataProvider) {
-            $matchDataProvider = ($this->matchMapper)($responseMatchDataProvider);
-            $this->message->send($matchDataProvider);
+            
+            if($responseMatchDataProvider->getHomeTeam()->hasName() && $responseMatchDataProvider->getAwayTeam()->hasName()) {
+                $matchDataProvider = ($this->matchMapper)($responseMatchDataProvider);
+                $this->message->send($matchDataProvider);
+            }
+           
         }
 
         return 1;
