@@ -79,10 +79,10 @@ class MatchMapperTest extends TestCase
             [
                 'event' => 'match.api',
                 'data' => [
-                    'matchId' => '2020-06-16:2100:FR-DE',
+                    'matchId' => '2020-06-16:2300:FR-DE',
                     'team1' => 'FR',
                     'team2' => 'DE',
-                    'matchDatetime' => '2020-06-16 21:00',
+                    'matchDatetime' => '2020-06-16 23:00',
                     'scoreTeam1' =>  null,
                     'scoreTeam2' =>  null
                 ]
