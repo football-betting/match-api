@@ -50,7 +50,8 @@ class MatchMapper
      */
     private function getMatchId(ResponseMatchDataProvider $responseMatchDataProvider, string $matchDateTime): string
     {
-        $timeAsString = str_replace(' ', ':', $matchDateTime) .  ':';
+        $timeAsString = str_replace(':', '', $matchDateTime);
+        $timeAsString = str_replace(' ', ':', $timeAsString) .  ':';
 
         return
             $timeAsString .
