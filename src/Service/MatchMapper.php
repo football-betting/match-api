@@ -24,11 +24,13 @@ class MatchMapper
         $matchDataProvider = new MatchDataProvider();
         $dataDataProvider = new DataDataProvider();
 
+        $matchDateTime = $this->getMatchDatetime($responseMatchDataProvider->getUtcDate());
+
         $dataDataProvider
-            ->setMatchId($this->getMatchId($responseMatchDataProvider))
+            ->setMatchId($this->getMatchId($responseMatchDataProvider, $matchDateTime))
             ->setTeam1($this->getCountryIsCode($responseMatchDataProvider->getHomeTeam()->getName()))
             ->setTeam2($this->getCountryIsCode($responseMatchDataProvider->getAwayTeam()->getName()))
-            ->setMatchDatetime($this->getMatchDatetime($responseMatchDataProvider->getUtcDate()))
+            ->setMatchDatetime($matchDateTime)
             ->setScoreTeam1($responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam())
             ->setScoreTeam2($responseMatchDataProvider->getScore()->getFullTime()->getAwayTeam());
 
@@ -46,10 +48,9 @@ class MatchMapper
      *
      * @return string
      */
-    private function getMatchId(ResponseMatchDataProvider $responseMatchDataProvider): string
+    private function getMatchId(ResponseMatchDataProvider $responseMatchDataProvider, string $matchDateTime): string
     {
-        $timeStamp = strtotime($responseMatchDataProvider->getUtcDate());
-        $timeAsString = $timeStamp !== false ? date('Y-m-d:Hi:', $timeStamp) : $responseMatchDataProvider->getUtcDate();
+        $timeAsString = str_replace(' ', ':', $matchDateTime) .  ':';
 
         return
             $timeAsString .
@@ -69,8 +70,8 @@ class MatchMapper
             throw new RuntimeException(sprintf('Time for %s is incorrect', $utcDate));
         }
 
-
         $dateTime = new DateTime($utcDate);
+        $dateTime->setTimezone(new \DateTimeZone('Europe/Berlin'));
         $date = $dateTime->format('Y-m-d H:i');
 
         if (!is_string($date)) {
