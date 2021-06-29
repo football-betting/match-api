@@ -31,8 +31,8 @@ class MatchMapper
             ->setTeam1($this->getCountryIsCode($responseMatchDataProvider->getHomeTeam()->getName()))
             ->setTeam2($this->getCountryIsCode($responseMatchDataProvider->getAwayTeam()->getName()))
             ->setMatchDatetime($matchDateTime)
-            ->setScoreTeam1($this->getScore($responseMatchDataProvider, true))
-            ->setScoreTeam2($this->getScore($responseMatchDataProvider, false));
+            ->setScoreTeam1($this->getHomeScore($responseMatchDataProvider))
+            ->setScoreTeam2($this->getAwayScore($responseMatchDataProvider));
 
         $matchDataProvider
             ->setEvent(self::EVENT)
@@ -45,27 +45,40 @@ class MatchMapper
 
     /**
      * @param \App\DataTransferObject\ResponseMatchDataProvider $responseMatchDataProvider
-     * @param bool $homeTeam
      *
      * @return int|null
      */
-    private function getScore(ResponseMatchDataProvider $responseMatchDataProvider, bool $homeTeam)
+    private function getHomeScore(ResponseMatchDataProvider $responseMatchDataProvider)
     {
-        if ($homeTeam) {
-            $score = $responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam();
+        $score = $responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam();
 
-            if($responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam() > 0) {
-                $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam();
-            }
-
-            if ($responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam() > 0) {
-                $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam();
-            }
-
+        if (!$score) {
             return $score;
         }
 
+        if($responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam() > 0) {
+            $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam();
+        }
+
+        if ($responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam() > 0) {
+            $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam();
+        }
+
+        return $score;
+    }
+
+    /**
+     * @param \App\DataTransferObject\ResponseMatchDataProvider $responseMatchDataProvider
+     *
+     * @return int|null
+     */
+    private function getAwayScore(ResponseMatchDataProvider $responseMatchDataProvider)
+    {
         $score = $responseMatchDataProvider->getScore()->getFullTime()->getAwayTeam();
+
+        if (!$score) {
+            return $score;
+        }
 
         if($responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam() > 0) {
             $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam();
