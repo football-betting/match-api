@@ -82,7 +82,7 @@ class MatchCommand extends Command
             
             if($responseMatchDataProvider->getHomeTeam()->hasName() && $responseMatchDataProvider->getAwayTeam()->hasName()) {
                 $matchDataProvider = ($this->matchMapper)($responseMatchDataProvider);
-                dump($matchDataProvider);
+                $this->message->send($matchDataProvider);
             }
            
         }
