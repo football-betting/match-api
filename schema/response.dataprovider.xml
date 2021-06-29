@@ -28,10 +28,12 @@
     </DataProvider>
 
     <DataProvider name="Score">
-        <DataElement name="fullTime" type="FullTime"/>
+        <DataElement name="fullTime" type="Goals"/>
+        <DataElement name="extraTime" type="Goals"/>
+        <DataElement name="penalties" type="Goals"/>
     </DataProvider>
 
-    <DataProvider name="FullTime">
+    <DataProvider name="Goals">
         <DataElement name="homeTeam" type="int" allownull="true"/>
         <DataElement name="awayTeam" type="int" allownull="true"/>
     </DataProvider>

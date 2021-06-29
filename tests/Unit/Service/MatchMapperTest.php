@@ -103,6 +103,14 @@ class MatchMapperTest extends TestCase
                     'fullTime' => [
                         'homeTeam' => null,
                         'awayTeam' => null
+                    ],
+                    'extraTime' => [
+                        'homeTeam' => null,
+                        'awayTeam' => null
+                    ],
+                    'penalties' => [
+                        'homeTeam' => null,
+                        'awayTeam' => null
                     ]
                 ]
             ]
