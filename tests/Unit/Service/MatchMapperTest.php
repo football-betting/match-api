@@ -39,6 +39,66 @@ class MatchMapperTest extends TestCase
      * @param \App\DataTransferObject\MatchDataProvider $expectedTestMatchDataProvider
      * @param \App\DataTransferObject\ResponseMatchDataProvider $testResponseMatchDataProvider
      */
+    public function testWithExtraScore(
+        MatchDataProvider $expectedTestMatchDataProvider,
+        ResponseMatchDataProvider $testResponseMatchDataProvider
+    ): void
+    {
+        $matchMapper = new MatchMapper();
+        $testResponseMatchDataProvider->getScore()->getExtraTime()->setHomeTeam(1);
+        $testResponseMatchDataProvider->getScore()->getExtraTime()->setAwayTeam(1);
+        $expectedTestMatchDataProvider->getData()->setScoreTeam1(
+            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getHomeTeam() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam()
+        );
+        $expectedTestMatchDataProvider->getData()->setScoreTeam2(
+            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getAwayTeam() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam()
+        );
+
+        $matchDataProvider = $matchMapper($testResponseMatchDataProvider);
+
+        self::assertSame($expectedTestMatchDataProvider->getEvent(), $matchDataProvider->getEvent());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getMatchId(), $matchDataProvider->getData()->getMatchId());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam1(), $matchDataProvider->getData()->getTeam1());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam2(), $matchDataProvider->getData()->getTeam2());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getMatchDatetime(), $matchDataProvider->getData()->getMatchDatetime());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam1(), $matchDataProvider->getData()->getScoreTeam1());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam2(), $matchDataProvider->getData()->getScoreTeam2());
+    }
+
+    /**
+     * @dataProvider provideDataProviders
+     *
+     * @param \App\DataTransferObject\MatchDataProvider $expectedTestMatchDataProvider
+     * @param \App\DataTransferObject\ResponseMatchDataProvider $testResponseMatchDataProvider
+     */
+    public function testWithMissingScore(
+        MatchDataProvider $expectedTestMatchDataProvider,
+        ResponseMatchDataProvider $testResponseMatchDataProvider
+    ): void
+    {
+        $matchMapper = new MatchMapper();
+        $testResponseMatchDataProvider->getScore()->getFullTime()->unsetHomeTeam();
+        $testResponseMatchDataProvider->getScore()->getFullTime()->unsetAwayTeam();
+        $expectedTestMatchDataProvider->getData()->unsetScoreTeam1();
+        $expectedTestMatchDataProvider->getData()->unsetScoreTeam2();
+
+        $matchDataProvider = $matchMapper($testResponseMatchDataProvider);
+
+        self::assertSame($expectedTestMatchDataProvider->getEvent(), $matchDataProvider->getEvent());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getMatchId(), $matchDataProvider->getData()->getMatchId());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam1(), $matchDataProvider->getData()->getTeam1());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getTeam2(), $matchDataProvider->getData()->getTeam2());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getMatchDatetime(), $matchDataProvider->getData()->getMatchDatetime());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam1(), $matchDataProvider->getData()->getScoreTeam1());
+        self::assertSame($expectedTestMatchDataProvider->getData()->getScoreTeam2(), $matchDataProvider->getData()->getScoreTeam2());
+    }
+
+    /**
+     * @dataProvider provideDataProviders
+     *
+     * @param \App\DataTransferObject\MatchDataProvider $expectedTestMatchDataProvider
+     * @param \App\DataTransferObject\ResponseMatchDataProvider $testResponseMatchDataProvider
+     */
     public function testWithMissingDateTime(
         MatchDataProvider $expectedTestMatchDataProvider,
         ResponseMatchDataProvider $testResponseMatchDataProvider
@@ -83,8 +143,8 @@ class MatchMapperTest extends TestCase
                     'team1' => 'FR',
                     'team2' => 'DE',
                     'matchDatetime' => '2020-06-16 23:00',
-                    'scoreTeam1' =>  null,
-                    'scoreTeam2' =>  null
+                    'scoreTeam1' =>  2,
+                    'scoreTeam2' =>  3
                 ]
             ]
         );
@@ -101,8 +161,8 @@ class MatchMapperTest extends TestCase
                 ],
                 'score' => [
                     'fullTime' => [
-                        'homeTeam' => null,
-                        'awayTeam' => null
+                        'homeTeam' => 2,
+                        'awayTeam' => 3
                     ],
                     'extraTime' => [
                         'homeTeam' => null,

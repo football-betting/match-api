@@ -6,7 +6,7 @@
         xsi:schemaLocation="xervice:dataprovider-01 ../vendor/xervice/data-provider/dataprovider.schema.xsd"
 >
     <DataProvider name="Competition">
-        <DataElement name="count" type="int"/>
+        <DataElement name="resultSet" type="ResultSet"/>
         <DataElement name="competition" type="CompetitionValues"/>
         <DataElement name="matches" type="ResponseMatch[]" singleton="ResponseMatch"/>
     </DataProvider>
@@ -15,6 +15,12 @@
         <DataElement name="name" type="string"/>
     </DataProvider>
 
+    <DataProvider name="ResultSet">
+        <DataElement name="count" type="int"/>
+        <DataElement name="first" type="string"/>
+        <DataElement name="last" type="string"/>
+        <DataElement name="played" type="int"/>
+    </DataProvider>
 
     <DataProvider name="ResponseMatch">
         <DataElement name="utcDate" type="string"/>

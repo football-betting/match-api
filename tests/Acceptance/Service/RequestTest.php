@@ -9,8 +9,8 @@ use Symfony\Component\HttpClient\MockHttpClient;
 
 class RequestTest extends KernelTestCase
 {
-    private const TOTAL_MATCHES = 51;
-    private const COMPETITION_NAME = 'European Championship';
+    private const TOTAL_MATCHES = 64;
+    private const COMPETITION_NAME = 'FIFA World Cup';
 
     public function testSuccessfulWithoutLiveFlag(): void
     {
@@ -21,7 +21,7 @@ class RequestTest extends KernelTestCase
 
         $competitionDataProvider = $request(false);
 
-        self::assertSame(self::TOTAL_MATCHES, $competitionDataProvider->getCount());
+        self::assertSame(self::TOTAL_MATCHES, $competitionDataProvider->getResultSet()->getCount());
         self::assertCount(self::TOTAL_MATCHES, $competitionDataProvider->getMatches());
     }
 

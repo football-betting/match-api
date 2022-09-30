@@ -27,7 +27,7 @@ class Request
 
         $responseArray = (array)json_decode($content, true);
 
-        if (!isset($responseArray['count'])) {
+        if (!isset($responseArray['resultSet'])) {
             throw new RuntimeException('Error');
         }
 

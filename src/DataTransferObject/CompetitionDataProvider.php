@@ -7,8 +7,8 @@ namespace App\DataTransferObject;
  */
 final class CompetitionDataProvider extends \Xervice\DataProvider\Business\Model\DataProvider\AbstractDataProvider implements \Xervice\DataProvider\Business\Model\DataProvider\DataProviderInterface
 {
-    /** @var int */
-    protected $count;
+    /** @var \App\DataTransferObject\ResultSetDataProvider */
+    protected $resultSet;
 
     /** @var \App\DataTransferObject\CompetitionValuesDataProvider */
     protected $competition;
@@ -18,21 +18,21 @@ final class CompetitionDataProvider extends \Xervice\DataProvider\Business\Model
 
 
     /**
-     * @return int
+     * @return \App\DataTransferObject\ResultSetDataProvider
      */
-    public function getCount(): int
+    public function getResultSet(): ResultSetDataProvider
     {
-        return $this->count;
+        return $this->resultSet;
     }
 
 
     /**
-     * @param int $count
+     * @param \App\DataTransferObject\ResultSetDataProvider $resultSet
      * @return CompetitionDataProvider
      */
-    public function setCount(int $count)
+    public function setResultSet(ResultSetDataProvider $resultSet)
     {
-        $this->count = $count;
+        $this->resultSet = $resultSet;
 
         return $this;
     }
@@ -41,9 +41,9 @@ final class CompetitionDataProvider extends \Xervice\DataProvider\Business\Model
     /**
      * @return CompetitionDataProvider
      */
-    public function unsetCount()
+    public function unsetResultSet()
     {
-        $this->count = null;
+        $this->resultSet = null;
 
         return $this;
     }
@@ -52,9 +52,9 @@ final class CompetitionDataProvider extends \Xervice\DataProvider\Business\Model
     /**
      * @return bool
      */
-    public function hasCount()
+    public function hasResultSet()
     {
-        return ($this->count !== null && $this->count !== []);
+        return ($this->resultSet !== null && $this->resultSet !== []);
     }
 
 
@@ -156,14 +156,14 @@ final class CompetitionDataProvider extends \Xervice\DataProvider\Business\Model
     protected function getElements(): array
     {
         return array (
-          'count' =>
+          'resultSet' =>
           array (
-            'name' => 'count',
+            'name' => 'resultSet',
             'allownull' => false,
             'default' => '',
-            'type' => 'int',
+            'type' => '\\App\\DataTransferObject\\ResultSetDataProvider',
             'is_collection' => false,
-            'is_dataprovider' => false,
+            'is_dataprovider' => true,
             'isCamelCase' => false,
           ),
           'competition' =>

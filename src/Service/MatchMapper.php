@@ -48,7 +48,7 @@ class MatchMapper
      *
      * @return int|null
      */
-    private function getHomeScore(ResponseMatchDataProvider $responseMatchDataProvider)
+    private function getHomeScore(ResponseMatchDataProvider $responseMatchDataProvider): ?int
     {
         $score = $responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam();
 
@@ -56,11 +56,11 @@ class MatchMapper
             return $score;
         }
 
-        if($responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam() > 0) {
+        if($responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam()) {
             $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam();
         }
 
-        if ($responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam() > 0) {
+        if ($responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam()) {
             $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam();
         }
 
@@ -72,7 +72,7 @@ class MatchMapper
      *
      * @return int|null
      */
-    private function getAwayScore(ResponseMatchDataProvider $responseMatchDataProvider)
+    private function getAwayScore(ResponseMatchDataProvider $responseMatchDataProvider): ?int
     {
         $score = $responseMatchDataProvider->getScore()->getFullTime()->getAwayTeam();
 
@@ -80,11 +80,11 @@ class MatchMapper
             return $score;
         }
 
-        if($responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam() > 0) {
+        if($responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam()) {
             $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam();
         }
 
-        if ($responseMatchDataProvider->getScore()->getPenalties()->getAwayTeam() > 0) {
+        if ($responseMatchDataProvider->getScore()->getPenalties()->getAwayTeam()) {
             $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getAwayTeam();
         }
 
