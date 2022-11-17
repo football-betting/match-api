@@ -141,8 +141,6 @@ class MatchMapper
             return IsoCodeConfig::ISO_CODES[$countryName];
         }
 
-        return 'no';
-
         throw new RuntimeException(sprintf('ISO Code not found for countryName: %s', $countryName));
     }
 }
