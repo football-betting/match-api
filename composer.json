@@ -9,9 +9,6 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
-        "doctrine/doctrine-bundle": "^2.7",
-        "doctrine/doctrine-migrations-bundle": "^3.1",
-        "doctrine/orm": "^2.8",
         "predis/predis": "^1.1",
         "symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
@@ -20,6 +17,7 @@
         "symfony/http-client": "5.2.*",
         "symfony/messenger": "5.2.*",
         "symfony/proxy-manager-bridge": "5.2.*",
+        "symfony/serializer": "^5.4",
         "symfony/yaml": "5.2.*",
         "xervice/data-provider": "^2.5"
     },
@@ -30,7 +28,7 @@
         },
         "sort-packages": true,
         "platform": {
-            "php": "7.4.15"
+            "php": "7.4.21"
         },
         "allow-plugins": {
             "infection/extension-installer": true,
@@ -75,14 +73,11 @@
         }
     },
     "require-dev": {
-        "infection/infection": "^0.22.1",
         "orklah/psalm-strict-types": "^0.1.2",
-        "phpstan/phpstan": "^0.12.85",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/maker-bundle": "^1.31",
-        "symfony/phpunit-bridge": "^5.2",
-        "vimeo/psalm": "^4.7"
+        "symfony/phpunit-bridge": "^5.2"
     }
 }
