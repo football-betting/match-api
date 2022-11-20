@@ -20,7 +20,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return \App\DataTransferObject\GoalsDataProvider
      */
-    public function getFullTime(): GoalsDataProvider
+    public function getFullTime(): ?GoalsDataProvider
     {
         return $this->fullTime;
     }
@@ -30,7 +30,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
      * @param \App\DataTransferObject\GoalsDataProvider $fullTime
      * @return ScoreDataProvider
      */
-    public function setFullTime(GoalsDataProvider $fullTime)
+    public function setFullTime(?GoalsDataProvider $fullTime = null)
     {
         $this->fullTime = $fullTime;
 
@@ -61,7 +61,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return \App\DataTransferObject\GoalsDataProvider
      */
-    public function getExtraTime(): GoalsDataProvider
+    public function getExtraTime(): ?GoalsDataProvider
     {
         return $this->extraTime;
     }
@@ -71,7 +71,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
      * @param \App\DataTransferObject\GoalsDataProvider $extraTime
      * @return ScoreDataProvider
      */
-    public function setExtraTime(GoalsDataProvider $extraTime)
+    public function setExtraTime(?GoalsDataProvider $extraTime = null)
     {
         $this->extraTime = $extraTime;
 
@@ -102,7 +102,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return \App\DataTransferObject\GoalsDataProvider
      */
-    public function getPenalties(): GoalsDataProvider
+    public function getPenalties(): ?GoalsDataProvider
     {
         return $this->penalties;
     }
@@ -112,7 +112,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
      * @param \App\DataTransferObject\GoalsDataProvider $penalties
      * @return ScoreDataProvider
      */
-    public function setPenalties(GoalsDataProvider $penalties)
+    public function setPenalties(?GoalsDataProvider $penalties = null)
     {
         $this->penalties = $penalties;
 
@@ -149,7 +149,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
           'fullTime' =>
           array (
             'name' => 'fullTime',
-            'allownull' => false,
+            'allownull' => true,
             'default' => '',
             'type' => '\\App\\DataTransferObject\\GoalsDataProvider',
             'is_collection' => false,
@@ -159,7 +159,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
           'extraTime' =>
           array (
             'name' => 'extraTime',
-            'allownull' => false,
+            'allownull' => true,
             'default' => '',
             'type' => '\\App\\DataTransferObject\\GoalsDataProvider',
             'is_collection' => false,
@@ -169,7 +169,7 @@ final class ScoreDataProvider extends \Xervice\DataProvider\Business\Model\DataP
           'penalties' =>
           array (
             'name' => 'penalties',
-            'allownull' => false,
+            'allownull' => true,
             'default' => '',
             'type' => '\\App\\DataTransferObject\\GoalsDataProvider',
             'is_collection' => false,

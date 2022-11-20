@@ -45,13 +45,13 @@ class MatchMapperTest extends TestCase
     ): void
     {
         $matchMapper = new MatchMapper();
-        $testResponseMatchDataProvider->getScore()->getExtraTime()->setHomeTeam(1);
+        $testResponseMatchDataProvider->getScore()->getExtraTime()->setHome(1);
         $testResponseMatchDataProvider->getScore()->getExtraTime()->setAwayTeam(1);
         $expectedTestMatchDataProvider->getData()->setScoreTeam1(
-            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getHomeTeam() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam()
+            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getHome() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getHome()
         );
         $expectedTestMatchDataProvider->getData()->setScoreTeam2(
-            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getAwayTeam() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam()
+            (int)$testResponseMatchDataProvider->getScore()->getFullTime()->getAway() - (int)$testResponseMatchDataProvider->getScore()->getExtraTime()->getAway()
         );
 
         $matchDataProvider = $matchMapper($testResponseMatchDataProvider);

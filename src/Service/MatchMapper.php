@@ -50,18 +50,18 @@ class MatchMapper
      */
     private function getHomeScore(ResponseMatchDataProvider $responseMatchDataProvider): ?int
     {
-        $score = $responseMatchDataProvider->getScore()->getFullTime()->getHomeTeam();
+        $score = $responseMatchDataProvider->getScore()->getFullTime()->getHome();
 
         if (!$score) {
             return $score;
         }
 
-        if($responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam()) {
-            $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHomeTeam();
+        if($responseMatchDataProvider->getScore()->getExtraTime()->getHome()) {
+            $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHome();
         }
 
-        if ($responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam()) {
-            $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHomeTeam();
+        if ($responseMatchDataProvider->getScore()->getPenalties()->getHome()) {
+            $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHome();
         }
 
         return $score;
@@ -74,18 +74,18 @@ class MatchMapper
      */
     private function getAwayScore(ResponseMatchDataProvider $responseMatchDataProvider): ?int
     {
-        $score = $responseMatchDataProvider->getScore()->getFullTime()->getAwayTeam();
+        $score = $responseMatchDataProvider->getScore()->getFullTime()->getAway();
 
         if (!$score) {
             return $score;
         }
 
-        if($responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam()) {
-            $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getAwayTeam();
+        if($responseMatchDataProvider->getScore()->getExtraTime() && $responseMatchDataProvider->getScore()->getExtraTime()->getAway()) {
+            $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getAway();
         }
 
-        if ($responseMatchDataProvider->getScore()->getPenalties()->getAwayTeam()) {
-            $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getAwayTeam();
+        if ($responseMatchDataProvider->getScore()->getPenalties() && $responseMatchDataProvider->getScore()->getPenalties()->getAway()) {
+            $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getAway();
         }
 
         return $score;

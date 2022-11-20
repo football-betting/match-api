@@ -8,28 +8,28 @@ namespace App\DataTransferObject;
 final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataProvider\AbstractDataProvider implements \Xervice\DataProvider\Business\Model\DataProvider\DataProviderInterface
 {
     /** @var int */
-    protected $homeTeam;
+    protected $home;
 
     /** @var int */
-    protected $awayTeam;
+    protected $away;
 
 
     /**
      * @return int
      */
-    public function getHomeTeam(): ?int
+    public function getHome(): ?int
     {
-        return $this->homeTeam;
+        return $this->home;
     }
 
 
     /**
-     * @param int $homeTeam
+     * @param int $home
      * @return GoalsDataProvider
      */
-    public function setHomeTeam(?int $homeTeam = null)
+    public function setHome(?int $home = null)
     {
-        $this->homeTeam = $homeTeam;
+        $this->home = $home;
 
         return $this;
     }
@@ -38,9 +38,9 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return GoalsDataProvider
      */
-    public function unsetHomeTeam()
+    public function unsetHome()
     {
-        $this->homeTeam = null;
+        $this->home = null;
 
         return $this;
     }
@@ -49,28 +49,28 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return bool
      */
-    public function hasHomeTeam()
+    public function hasHome()
     {
-        return ($this->homeTeam !== null && $this->homeTeam !== []);
+        return ($this->home !== null && $this->home !== []);
     }
 
 
     /**
      * @return int
      */
-    public function getAwayTeam(): ?int
+    public function getAway(): ?int
     {
-        return $this->awayTeam;
+        return $this->away;
     }
 
 
     /**
-     * @param int $awayTeam
+     * @param int $away
      * @return GoalsDataProvider
      */
-    public function setAwayTeam(?int $awayTeam = null)
+    public function setAway(?int $away = null)
     {
-        $this->awayTeam = $awayTeam;
+        $this->away = $away;
 
         return $this;
     }
@@ -79,9 +79,9 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return GoalsDataProvider
      */
-    public function unsetAwayTeam()
+    public function unsetAway()
     {
-        $this->awayTeam = null;
+        $this->away = null;
 
         return $this;
     }
@@ -90,9 +90,9 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     /**
      * @return bool
      */
-    public function hasAwayTeam()
+    public function hasAway()
     {
-        return ($this->awayTeam !== null && $this->awayTeam !== []);
+        return ($this->away !== null && $this->away !== []);
     }
 
 
@@ -102,9 +102,9 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
     protected function getElements(): array
     {
         return array (
-          'homeTeam' =>
+          'home' =>
           array (
-            'name' => 'homeTeam',
+            'name' => 'home',
             'allownull' => true,
             'default' => '',
             'type' => 'int',
@@ -112,9 +112,9 @@ final class GoalsDataProvider extends \Xervice\DataProvider\Business\Model\DataP
             'is_dataprovider' => false,
             'isCamelCase' => false,
           ),
-          'awayTeam' =>
+          'away' =>
           array (
-            'name' => 'awayTeam',
+            'name' => 'away',
             'allownull' => true,
             'default' => '',
             'type' => 'int',

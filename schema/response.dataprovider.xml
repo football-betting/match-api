@@ -34,14 +34,14 @@
     </DataProvider>
 
     <DataProvider name="Score">
-        <DataElement name="fullTime" type="Goals"/>
-        <DataElement name="extraTime" type="Goals"/>
-        <DataElement name="penalties" type="Goals"/>
+        <DataElement name="fullTime" type="Goals" allownull="true"/>
+        <DataElement name="extraTime" type="Goals" allownull="true"/>
+        <DataElement name="penalties" type="Goals" allownull="true"/>
     </DataProvider>
 
     <DataProvider name="Goals">
-        <DataElement name="homeTeam" type="int" allownull="true"/>
-        <DataElement name="awayTeam" type="int" allownull="true"/>
+        <DataElement name="home" type="int" allownull="true"/>
+        <DataElement name="away" type="int" allownull="true"/>
     </DataProvider>
 
 </DataProviders>
