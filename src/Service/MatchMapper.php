@@ -56,11 +56,11 @@ class MatchMapper
             return $score;
         }
 
-        if($responseMatchDataProvider->getScore()->getExtraTime()->getHome()) {
+        if($responseMatchDataProvider->getScore()->getExtraTime() && $responseMatchDataProvider->getScore()->getExtraTime()->getHome()) {
             $score = $score - $responseMatchDataProvider->getScore()->getExtraTime()->getHome();
         }
 
-        if ($responseMatchDataProvider->getScore()->getPenalties()->getHome()) {
+        if ($responseMatchDataProvider->getScore()->getPenalties() && $responseMatchDataProvider->getScore()->getPenalties()->getHome()) {
             $score = $score - $responseMatchDataProvider->getScore()->getPenalties()->getHome();
         }
 
